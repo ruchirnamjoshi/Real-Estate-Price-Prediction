@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real Estate House Prediction Prediction</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+<script type="text/javascript">
+        
+  function predict_home_price() {
+  console.log("Estimate price button clicked");
+    
+    var BHK1 = document.getElementById("iw");
+    var SQFT1 = document.getElementById("iv");
+    var BATH1 = document.getElementById("im");
+    var BALCONY1 = document.getElementById("oi");
+
+    var AR_TYPE1 = document.getElementById("ifc");
+    var AP_TYPE1 = document.getElementById("it");
+    var LOCATION1 = document.getElementById("os");
+    var estPrice = document.getElementById("uiEstimatedPrice");
+
+
+  var url = "http://127.0.0.1:5000/predict_home_price"; //Use this if you are NOT using nginx which is first 7 tutorials
+  // var url = "/api/predict_home_price"; // Use this if  you are using nginx. i.e tutorial 8 and onwards
+
+  $.post(url, {
+      
+      BHK: parseFloat(BHK1.value),
+      SQFT: parseFloat(SQFT1.value),
+      BATH: parseFloat(BATH1.value),
+      BALCONY: parseFloat(BALCONY1.value),
+
+      AREA_TYPE: AR_TYPE1.value,
+      AP_TYPE: AP_TYPE1.value,
+      LOCATION: LOCATION1.value,
+      
+  },function(data, status) {
+      console.log(data.estimated_price);
+      estPrice.innerHTML = "<h2>" + data.estimated_price.toString() + "</h2>";
+      console.log(status);
+  });
+}
+        
+</script>
+    
+	<link rel="stylesheet" href="app.css">
+    
+</head>
+<body>
+<div class="img"></div>
+<form class="form">
+    <h1>Real Estate cost Prediction</h1>
+	<h2>Number of Bedrooms</h2>
+    <input class="area"  type="text" id="iw" class="floatLabel" name="Squareft" value="0">
+    
+    <h2>Area in Square Feets</h2>
+    <input class="area"  type="text" id="iv" class="floatLabel" name="Squareft" value="0">
+    
+    <h2>Number of Bathrooms</h2>
+    <input class="area"  type="text" id="im" class="floatLabel" name="Squareft" value="0">
+    
+    <h2>Number of Balcony</h2>
+    <input class="area"  type="text" id="oi" class="floatLabel" name="Squareft" value="0">
+    
+
+	
+    
+		<h2>Built up Area</h2>
+	<div>
+  <select class="location" name="" id="ifc">
+    <option value="" disabled="disabled" selected="selected">Choose an Option</option>
+		<option>built-up  area</option>
+        <option>carpet  area</option>
+        <option> plot  area</option>
+        <option> super built-up  area</option>
+
+  </select>
+</div>
+    
+    <h2>Availablity</h2>
+	<div>
+  <select class="location" name="" id="it">
+    <option value="" disabled="disabled" selected="selected">Choose an Option</option>
+		<option>ready to move</option>
+        <option>under construction</option>
+
+  </select>
+</div>
+    
+    <h2>Location</h2>
+	<div>
+  <select class="location" name="" id="os">
+    <option value="" disabled="disabled" selected="selected">Choose an Option</option>
+		<option>1st phase jp nagar</option>
+        <option>whitefield</option>
+        <option>2nd phase judicial layout</option>
+      <option>5th phase jp nagar</option>
+      <option>6th phase jp nagar</option>
+      <option>7th phase jp nagar</option>
+      <option>8th phase jp naga</option>
+      <option>9nd phase judicial layout</option>
+      <option>abbigere</option>
+      <option>aecs layout</option>
+      <option>akshaya nagar</option>
+      <option>ambalipura</option>
+      <option>ambedkar nagar</option>
+      <option>amruthahalli</option>
+      <option>anandapura</option>
+      <option>ananth nagar</option>
+      <option>anekal</option>
+      <option>anjanapura</option>
+      <option>ardendale</option>
+      <option>arekere</option>
+      <option>attibele</option>
+      <option>babusapalaya</option>
+      <option>badavala nagar</option>
+      <option>balagere</option>
+      <option>banashankari</option>
+      <option>banashankari stage ii</option>
+      <option>banashankari stage iii</option>
+      <option>banashankari stage v</option>
+      <option>banashankari stage vi</option>
+      <option>banaswadi</option>
+      <option>bannerghatta</option>
+      <option>bannerghatta road</option>
+      <option>basavangudi</option>
+      <option>basaveshwara nagar</option>
+      <option>battarahalli</option>
+      <option>begur</option>
+      <option>begur road</option>
+      <option>bellandur</option>
+      <option>beml layout</option>
+      <option>benson town</option>
+      <option>bharathi nagar</option>
+      <option>bhoganhalli</option>
+      <option>billekahalli</option>
+      <option>binny pete</option>
+      <option>bisuvanahalli</option>
+      <option>bommanahalli</option>
+      <option>bommasandra</option>
+      <option>bommasandra industrial area</option>
+      <option>brookefield</option>
+      <option>btm 2nd stage</option>
+      <option>"btm layout</option>
+      <option>budigere</option>
+      <option>chamrajpet</option>
+      <option>chandapura</option>
+      <option>channasandra</option>
+
+
+
+
+
+
+  </select>
+</div>
+    
+
+    
+    
+    
+
+
+	<button class="submit" onclick="predict_home_price()" type="button">Estimate House Price</button>
+    
+	<div id="uiEstimatedPrice" class="result">	<h2>Result</h2> </div>
+    
+</form>
+</body>
+</html>
